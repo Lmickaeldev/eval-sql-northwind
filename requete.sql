@@ -16,7 +16,7 @@ FROM `suppliers`
 JOIN `products` 
 ON products.SupplierID = suppliers.SupplierID 
 WHERE Country = 'France' 
-GROUP BY CompanyName;
+GROUP BY Fournisseur;
 
 -- 4 Liste des clients français ayant passé plus de 10 commandes :
 SELECT CompanyName AS Client, COUNT(OrderId) as Nbre_commandes
@@ -24,8 +24,8 @@ FROM `customers`
 JOIN `orders` 
 ON orders.CustomerID = customers.CustomerID 
 WHERE Country = 'France' 
-GROUP BY CompanyName 
-HAVING COUNT(OrderId) > 10;
+GROUP BY Client 
+HAVING Nbre_commandes > 10;
 
 -- 5 Liste des clients dont le montant cumulé de toutes les commandes passées est supérieur à 30000 € :
 SELECT SUM(UnitPrice * Quantity) AS 'CA' , CompanyName as 'client' 
@@ -44,7 +44,7 @@ ON products.ProductID = `order details`.`ProductID`
 JOIN `suppliers` 
 ON suppliers.SupplierID = products.SupplierID
 WHERE suppliers.CompanyName = 'Exotic Liquids' 
-GROUP BY ShipCountry;
+GROUP BY pays;
 
 -- 7 - Chiffre d'affaires global sur les ventes de 1997 :
 SELECT SUM(UnitPrice * Quantity) AS montant_Ventes_1997
